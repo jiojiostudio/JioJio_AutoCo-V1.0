@@ -1,0 +1,113 @@
+{
+  "manifest_version": 3,
+  "name": "JioJioAutoCo",
+  "version": "1.0.0",
+  "description": "Automated Stripe Checkout Tool",
+  "permissions": [
+    "scripting",
+    "declarativeNetRequest",
+    "storage",
+    "offscreen",
+    "downloads",
+    "tabs",
+    "clipboardWrite",
+    "webRequest",
+    "activeTab",
+    "webNavigation",
+    "windows"
+  ],
+  "host_permissions": [
+    "https://api.telegram.org/*",
+    "https://checkout.stripe.com/*",
+    "https://buy.stripe.com/*",
+    "https://*.stripe.com/*",
+    "http://82.180.137.85:5000/*",
+    "https://*/*"
+  ],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon.png",
+      "32": "icons/icon.png",
+      "48": "icons/icon.png",
+      "128": "icons/icon.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon.png",
+    "32": "icons/icon.png",
+    "48": "icons/icon.png",
+    "128": "icons/icon.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://buy.stripe.com/*"
+      ],
+      "js": ["content.js"],
+      "css": ["styles.css"],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://checkout.stripe.com/*",
+        "https://*.stripe.com/*",
+        "https://*/*"
+      ],
+      "include_globs": [
+        "*cs_live*",
+        "*ppage_*"
+      ],
+      "js": ["content.js"],
+      "css": ["styles.css"],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://js.stripe.com/v3/embedded-checkout-inner-*.html*"
+      ],
+      "js": ["content.js"],
+      "css": ["styles.css"],
+      "run_at": "document_start",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://js.stripe.com/v3/card-details-recollection*.html*"
+      ],
+      "js": ["postalcode.js"],
+      "run_at": "document_start",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://b.stripecdn.com/stripethirdparty-srv/assets/*/HCaptcha.html*",
+        "https://*.hcaptcha.com/*"
+      ],
+      "js": ["hcaptcha.js"],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [{
+    "resources": [
+      "inject.js",
+      "hit.mp3",
+      "offscreen.html",
+      "icons/*",
+      "popup.html"
+    ],
+    "matches": ["<all_urls>"]
+  }],
+  "declarative_net_request": {
+    "rule_resources": [{
+      "id": "rules",
+      "enabled": true,
+      "path": "rules.json"
+    }]
+  }
+}
