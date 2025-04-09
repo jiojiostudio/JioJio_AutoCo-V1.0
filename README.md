@@ -48,7 +48,8 @@ To use the Telegram integration:
 1. Get your Telegram Chat ID
 2. Create a Telegram Bot and obtain the Bot Token
 3. Enter these credentials in the extension settings
-4. The extension will now send notifications to your Telegram account
+4. Edit config.js and enter your telegram ID and Bot token
+5. The extension will now send notifications to your Telegram account
 
 ### Support
 
@@ -103,8 +104,8 @@ JioJioAutoCo 是一款功能强大的 Chrome 扩展，旨在通过自动化功�
 
 1. 获取您的 Telegram 聊天 ID
 2. 创建一个 Telegram 机器人并获取机器人令牌
-3. 在扩展设置中输入这些凭据
-4. 扩展现在将向您的 Telegram 账户发送通知
+3. 打开文件中的config.js进行编辑，填入你的Chat ID, Bot Token和 Group ID
+4. 扩展现在将向您的 Telegram Bot和群组发送消息
 
 ### 支持
 
